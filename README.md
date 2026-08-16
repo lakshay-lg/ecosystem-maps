@@ -27,13 +27,17 @@ to that node, so individual concepts can be linked from notes or chat.
 
 ### Enabling Pages
 
-The included workflow (`.github/workflows/pages.yml`) validates every map and
-then deploys the repository root — there is no build step.
+There is no build step — the repository root *is* the site — so a branch deploy
+is all it takes:
 
-1. Push to `main`.
-2. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
-3. The next push to `main` publishes. The workflow fails the deploy if any map
-   has broken edges, so a malformed graph can't reach the site.
+1. Merge this branch into `main`.
+2. **Settings → Pages → Build and deployment → Source: Deploy from a branch →
+   `main` / `/ (root)`.**
+3. It publishes within a minute or two.
+
+Optionally, `ci/pages-workflow.yml` deploys via GitHub Actions instead and runs
+`scripts/validate.mjs` first, so a malformed graph fails the deploy rather than
+shipping. See `ci/README.md` for the two commands that enable it.
 
 ## Repository layout
 
@@ -58,8 +62,10 @@ assets/
   vendor/d3.v7.min.js      vendored D3 7.9.0
 scripts/
   new-map.mjs              scaffold a new map
-  validate.mjs             graph integrity check (also runs in CI)
+  validate.mjs             graph integrity check
   fetch-fonts.sh           regenerate the self-hosted fonts
+ci/
+  pages-workflow.yml       optional Actions deploy + validation gate
 prompts/
   ecosystem-map-builder.md system prompt for generating a new map's data file
 ```
