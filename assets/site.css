@@ -1,0 +1,186 @@
+/* Homepage / index styles. Shares the visual language of the maps themselves. */
+
+:root {
+  --bg: #121218;
+  --panel: #1b1b25;
+  --panel-2: #20202b;
+  --line: rgba(255, 255, 255, 0.09);
+  --text: #e8e8ee;
+  --muted: #9a9aac;
+  --faint: #6c6c7e;
+  --core: #a78bfa;
+}
+
+* { box-sizing: border-box }
+
+html { scroll-behavior: smooth }
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(1200px 800px at 70% -10%, rgba(124, 108, 210, 0.12), transparent 60%),
+    radial-gradient(900px 700px at -10% 110%, rgba(45, 212, 191, 0.08), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px }
+
+/* ---------- header ---------- */
+header { padding: 88px 0 40px }
+.eyebrow {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--faint); margin: 0 0 14px;
+}
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.1rem, 5.5vw, 3.2rem);
+  font-weight: 600; line-height: 1.08; letter-spacing: -0.015em;
+  margin: 0 0 18px;
+}
+h1 .accent {
+  background: linear-gradient(100deg, #a78bfa, #60a5fa 45%, #34d399);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lede {
+  font-size: 1rem; line-height: 1.7; color: var(--muted);
+  max-width: 60ch; margin: 0;
+}
+
+/* ---------- global search ---------- */
+.search-block { margin: 34px 0 0; position: relative; max-width: 560px }
+.search-field {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 11px; padding: 0 14px; transition: border-color .15s;
+}
+.search-field:focus-within { border-color: var(--core) }
+.search-field svg { flex-shrink: 0; opacity: 0.5 }
+.search-field input {
+  flex: 1; background: none; border: none; outline: none;
+  color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.92rem;
+  padding: 13px 0;
+}
+.search-field input::placeholder { color: var(--faint) }
+.search-field kbd {
+  font-family: 'Inter', sans-serif; font-size: 0.66rem; color: var(--faint);
+  border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px;
+}
+
+.results {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 20;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 11px;
+  max-height: 58vh; overflow-y: auto; padding: 6px;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+}
+.results[hidden] { display: none }
+.results a {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 9px 11px; border-radius: 7px;
+  color: var(--text); text-decoration: none; font-size: 0.86rem;
+}
+.results a:hover, .results a.active { background: rgba(255, 255, 255, 0.06) }
+.results .r-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; align-self: center }
+.results .r-label { font-weight: 500 }
+.results .r-meta { margin-left: auto; font-size: 0.72rem; color: var(--faint); white-space: nowrap }
+.results .empty { padding: 14px 12px; font-size: 0.83rem; color: var(--faint) }
+
+/* ---------- map grid ---------- */
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px; margin: 70px 0 20px;
+}
+.section-head h2 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem;
+  font-weight: 600; margin: 0; letter-spacing: 0.01em;
+}
+.section-head .count { font-size: 0.78rem; color: var(--faint) }
+
+.grid {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  padding-bottom: 20px;
+}
+
+.card {
+  position: relative; display: flex; flex-direction: column;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  padding: 24px 22px 20px; text-decoration: none; color: inherit;
+  overflow: hidden; transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--card-accent, var(--core)); opacity: 0.85;
+}
+.card::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(420px 180px at 100% 0%, var(--card-accent, var(--core)), transparent 70%);
+  opacity: 0.06; transition: opacity .18s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.18);
+  background: var(--panel-2);
+}
+.card:hover::after { opacity: 0.13 }
+
+.card h3 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 1.12rem; font-weight: 600;
+  margin: 0 0 8px; line-height: 1.3;
+}
+.card .sub { font-size: 0.76rem; color: var(--card-accent, var(--core)); margin: 0 0 12px; opacity: 0.9 }
+.card .blurb { font-size: 0.845rem; line-height: 1.62; color: #c2c2d0; margin: 0 0 18px }
+
+.card .swatches { display: flex; gap: 4px; margin-bottom: 14px; flex-wrap: wrap }
+.card .swatches i { width: 13px; height: 5px; border-radius: 2px; display: block }
+
+.card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px }
+.card .tags span {
+  font-size: 0.68rem; color: var(--muted); padding: 3px 8px;
+  border: 1px solid var(--line); border-radius: 999px; background: rgba(255, 255, 255, 0.03);
+}
+
+.card .foot {
+  margin-top: auto; display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; font-size: 0.73rem; color: var(--faint);
+  border-top: 1px solid var(--line); padding-top: 14px;
+}
+.card .foot .go { color: var(--muted); font-weight: 500 }
+.card:hover .foot .go { color: var(--text) }
+
+/* ---------- about / footer ---------- */
+.about {
+  margin: 24px 0 0; padding: 26px 24px;
+  border: 1px solid var(--line); border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.about h2 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem;
+  margin: 0 0 12px; font-weight: 600;
+}
+.about p { font-size: 0.86rem; line-height: 1.7; color: var(--muted); margin: 0 0 10px; max-width: 72ch }
+.about p:last-child { margin-bottom: 0 }
+.about code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8em;
+  background: rgba(255, 255, 255, 0.06); padding: 1.5px 5px; border-radius: 4px; color: #cfcfda;
+}
+.about a { color: var(--core); text-decoration: none }
+.about a:hover { text-decoration: underline }
+
+footer {
+  padding: 46px 0 60px; font-size: 0.76rem; color: var(--faint);
+  display: flex; gap: 18px; flex-wrap: wrap; align-items: center;
+}
+footer a { color: var(--muted); text-decoration: none }
+footer a:hover { color: var(--text) }
+
+@media (max-width: 640px) {
+  header { padding: 56px 0 28px }
+  .wrap { padding: 0 20px }
+  .grid { grid-template-columns: 1fr }
+  .search-field kbd { display: none }
+}

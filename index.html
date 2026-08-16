@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ecosystem Maps</title>
+<meta name="description" content="Interactive, Obsidian-style ecosystem maps: force-directed graphs of the tools, concepts and connections inside a technical field.">
+<meta property="og:title" content="Ecosystem Maps">
+<meta property="og:description" content="Interactive, Obsidian-style graphs of the tools, concepts and connections inside a technical field.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='6' fill='%23a78bfa'/><circle cx='5' cy='7' r='3' fill='%2360a5fa'/><circle cx='27' cy='9' r='3' fill='%2334d399'/><circle cx='7' cy='26' r='3' fill='%23f472b6'/><circle cx='26' cy='25' r='3' fill='%23fbbf24'/><g stroke='%23ffffff' stroke-opacity='0.35' stroke-width='1.2'><line x1='16' y1='16' x2='5' y2='7'/><line x1='16' y1='16' x2='27' y2='9'/><line x1='16' y1='16' x2='7' y2='26'/><line x1='16' y1='16' x2='26' y2='25'/></g></svg>">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Interactive knowledge graphs</p>
+    <h1>Ecosystem <span class="accent">Maps</span></h1>
+    <p class="lede">
+      Obsidian-style force-directed graphs of technical fields — every node is a concept or
+      tool, every edge a real relationship, and every click opens a written explanation with
+      links out to the primary docs. Built to be explored, not read top to bottom.
+    </p>
+
+    <div class="search-block">
+      <div class="search-field">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+        </svg>
+        <input id="q" type="text" autocomplete="off" spellcheck="false"
+               placeholder="Search every map — try “attention”, “boosting”, “shaders”…"
+               aria-label="Search all maps" aria-controls="results" aria-expanded="false">
+        <kbd>/</kbd>
+      </div>
+      <div class="results" id="results" role="listbox" hidden></div>
+    </div>
+  </header>
+
+  <div class="section-head">
+    <h2>Maps</h2>
+    <span class="count" id="map-count"></span>
+  </div>
+
+  <main class="grid" id="grid"></main>
+
+  <section class="about">
+    <h2>How these are built</h2>
+    <p>
+      Each map is a single data file — clusters, nodes and edges — rendered by one shared
+      D3 shell, so every map behaves identically: drag nodes, scroll to zoom, click for the
+      detail panel, click a legend colour to isolate a cluster. Node size tracks how central
+      a concept is to its field.
+    </p>
+    <p>
+      Adding a map means dropping a <code>data/&lt;slug&gt;.js</code> file next to the others,
+      copying a map page, and adding one entry to <code>data/manifest.js</code>. There is no
+      build step and no framework — it is plain static HTML, deployed straight to GitHub Pages.
+      See <code>README.md</code> for the walkthrough.
+    </p>
+  </section>
+
+  <footer>
+    <span>Static site · no build step · deployed with GitHub Pages</span>
+    <a href="https://github.com/lakshay-lg/ecosystem-maps">Source on GitHub</a>
+  </footer>
+
+</div>
+
+<script src="data/manifest.js"></script>
+<script src="assets/home.js"></script>
+</body>
+</html>

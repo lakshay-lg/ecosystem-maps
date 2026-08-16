@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not found · Ecosystem Maps</title>
+<!--
+  Deliberately self-contained: GitHub serves this file for a missing path at any
+  depth, so relative asset paths would resolve differently per URL, and absolute
+  ones would break on a project page served under /<repo>/. Inline styles avoid
+  both, and the home link is derived from the current path at runtime.
+-->
+<style>
+  :root { --bg:#121218; --line:rgba(255,255,255,.09); --text:#e8e8ee; --muted:#9a9aac; --faint:#6c6c7e; --core:#a78bfa }
+  * { box-sizing:border-box }
+  body {
+    margin:0; min-height:100vh; display:flex; align-items:center;
+    background:
+      radial-gradient(1200px 800px at 70% -10%, rgba(124,108,210,.12), transparent 60%),
+      radial-gradient(900px 700px at -10% 110%, rgba(45,212,191,.08), transparent 60%),
+      var(--bg);
+    color:var(--text); font-family:'Inter',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:640px; margin:0 auto; padding:0 28px }
+  .code { font-size:3.4rem; font-weight:600; margin:0 0 6px; color:var(--core); letter-spacing:-.02em }
+  h1 { font-size:1.5rem; font-weight:600; margin:0 0 14px; letter-spacing:-.01em }
+  p { font-size:.95rem; line-height:1.7; color:var(--muted); margin:0; max-width:52ch }
+  a {
+    display:inline-block; margin-top:26px; font-size:.85rem; color:var(--muted);
+    text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:9px 16px;
+    transition:color .15s, border-color .15s;
+  }
+  a:hover { color:var(--text); border-color:var(--core) }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="code">404</p>
+  <h1>This node isn&rsquo;t on the graph</h1>
+  <p>The page you asked for doesn&rsquo;t exist. Head back to the index to pick a map.</p>
+  <a id="home" href="/">&larr; All maps</a>
+</div>
+<script>
+  // A GitHub *project* page is served under /<repo>/, so "/" is not the site
+  // root there. On <user>.github.io the first path segment is that repo prefix —
+  // unless it's one of our own directories or a filename, which means we're
+  // already at the root. Custom domains and local servers serve from "/".
+  (function () {
+    var parts = location.pathname.split('/').filter(Boolean);
+    var ours = ['maps', 'assets', 'data', 'scripts', 'prompts'];
+    var link = document.getElementById('home');
+    var base = '/';
+    if (/\.github\.io$/i.test(location.hostname) && parts.length &&
+        parts[0].indexOf('.') === -1 && ours.indexOf(parts[0]) === -1) {
+      base = '/' + parts[0] + '/';
+    }
+    link.setAttribute('href', base);
+
+    // "/<first-segment>/" is a guess: on a user page it could just as easily be
+    // a missing top-level path. Confirm it by probing for a file that only
+    // exists at the real site root, and fall back if it isn't there.
+    if (base !== '/' && window.fetch) {
+      fetch(base + 'data/manifest.js', { method: 'HEAD' })
+        .then(function (r) { if (!r.ok) link.setAttribute('href', '/'); })
+        .catch(function () { link.setAttribute('href', '/'); });
+    }
+  })();
+</script>
+</body>
+</html>
