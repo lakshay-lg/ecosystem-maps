@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>DBMS & SQL for Placements Ecosystem Map</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='6' fill='%23a78bfa'/><circle cx='5' cy='7' r='3' fill='%2360a5fa'/><circle cx='27' cy='9' r='3' fill='%2334d399'/><circle cx='7' cy='26' r='3' fill='%23f472b6'/><circle cx='26' cy='25' r='3' fill='%23fbbf24'/><g stroke='%23ffffff' stroke-opacity='0.35' stroke-width='1.2'><line x1='16' y1='16' x2='5' y2='7'/><line x1='16' y1='16' x2='27' y2='9'/><line x1='16' y1='16' x2='7' y2='26'/><line x1='16' y1='16' x2='26' y2='25'/></g></svg>">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../assets/map.css">
+<!-- d3 is vendored rather than pulled from a CDN: the maps then work offline,
+     inside an Obsidian vault, and behind networks that block public CDNs. -->
+<script src="../assets/vendor/d3.v7.min.js"></script>
+</head>
+<body data-map="dbms-placements">
+
+<div id="app"><svg id="graph"></svg></div>
+
+<div class="hud" id="title">
+  <div id="nav">
+    <a class="home" href="../">← All maps</a>
+    <select id="map-switcher" aria-label="Switch map"></select>
+  </div>
+  <h1 id="map-title"></h1>
+  <p id="map-subtitle"></p>
+</div>
+<div class="hud" id="search"><input id="search-input" type="text" placeholder="Search nodes…" /></div>
+<div class="hud" id="legend"><ul id="legend-list"></ul></div>
+<div class="hud" id="hint">Drag nodes &middot; scroll to zoom &middot; click a node for details &middot; click a legend dot to isolate a cluster</div>
+
+<aside id="panel" aria-hidden="true">
+  <button class="close" id="close" aria-label="Close panel">&times;</button>
+  <div class="cat" id="p-cat"><span class="dot" id="p-dot"></span><span id="p-cat-name"></span></div>
+  <h2 id="p-title"></h2>
+  <p class="desc" id="p-desc"></p>
+  <div id="p-links-wrap">
+    <p class="lbl">Documentation &amp; learning</p>
+    <div class="links" id="p-links"></div>
+  </div>
+  <div id="p-conn-wrap">
+    <p class="lbl">Connected to</p>
+    <div class="chips" id="p-conn"></div>
+  </div>
+</aside>
+
+<script src="../data/manifest.js"></script>
+<script src="../data/dbms-placements.js"></script>
+<script src="../assets/map.js"></script>
+</body>
+</html>

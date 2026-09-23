@@ -43,5 +43,14 @@ window.EcosystemMapManifest = [
     blurb: 'Everything campus coding rounds test: core structures, the recurring problem patterns, graphs and DP, plus the platforms, sheets and interview process to prepare with. CP-only depth (flows, FFT, HLD), system design and CS core subjects are left out.',
     accent: '#fb923c',
     tags: ['LeetCode', 'Patterns', 'Graphs', 'DP']
+  },
+  {
+    slug: 'dbms-placements',
+    name: 'DBMS & SQL for Placements',
+    title: 'DBMS & SQL for Placements Ecosystem Map',
+    subtitle: 'ER, keys & normalization · SQL · transactions, concurrency, indexing & NoSQL',
+    blurb: 'The DBMS and SQL syllabus placement rounds draw on: ER design, keys and normal forms, SQL from joins to window functions, and ACID transactions with the concurrency, recovery and indexing that make them work. Database administration, specific cloud database products and data-warehouse modelling are left out.',
+    accent: '#facc15',
+    tags: ['SQL', 'Normalization', 'Transactions', 'Indexing']
   }
 ];
