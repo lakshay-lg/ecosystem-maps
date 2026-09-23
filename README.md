@@ -63,11 +63,14 @@ assets/
 scripts/
   new-map.mjs              scaffold a new map
   validate.mjs             graph integrity check
+  publish.sh               validate → commit one map → push → wait for Pages
   fetch-fonts.sh           regenerate the self-hosted fonts
 ci/
   pages-workflow.yml       optional Actions deploy + validation gate
 prompts/
   ecosystem-map-builder.md system prompt for generating a new map's data file
+skills/
+  ecosystem-map/SKILL.md   Claude Code skill: topic in, live map out
 ```
 
 **No external runtime dependencies.** D3 and both fonts are committed to the
@@ -75,6 +78,22 @@ repository, so the site renders identically offline, behind a network that
 blocks public CDNs, or dropped into an Obsidian vault.
 
 ## Adding a map
+
+### With Claude Code (one step)
+
+`skills/ecosystem-map/` is a Claude Code skill that runs the whole pipeline —
+research, write the data file, validate, commit, push, confirm the deploy. Link it
+into your user skills once so it works from any directory:
+
+```bash
+ln -sfn "$PWD/skills/ecosystem-map" ~/.claude/skills/ecosystem-map
+```
+
+Then just ask, from anywhere: *"make an ecosystem map of Rust async"* or
+*"extend my Three.js map with WebGPU"*. The skill follows
+`prompts/ecosystem-map-builder.md` for content and ships via `scripts/publish.sh`.
+
+### By hand
 
 ```bash
 node scripts/new-map.mjs rust "Rust Ecosystem Map"
@@ -90,6 +109,8 @@ That creates `data/rust.js` and `maps/rust.html` and registers the map in
    colour and tags for the homepage card.
 3. **Check it**: `node scripts/validate.mjs`
 4. **Preview it**: `python3 -m http.server 8000` → <http://localhost:8000>
+5. **Ship it**: `scripts/publish.sh rust "Add Rust ecosystem map"` — validates,
+   commits only that map's files, pushes to `main` and waits for Pages.
 
 Node and cluster counts on the homepage are read from the data files at runtime,
 so they never need updating by hand.
