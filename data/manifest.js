@@ -52,5 +52,14 @@ window.EcosystemMapManifest = [
     blurb: 'The DBMS and SQL syllabus placement rounds draw on: ER design, keys and normal forms, SQL from joins to window functions, and ACID transactions with the concurrency, recovery and indexing that make them work. Database administration, specific cloud database products and data-warehouse modelling are left out.',
     accent: '#facc15',
     tags: ['SQL', 'Normalization', 'Transactions', 'Indexing']
+  },
+  {
+    slug: 'os-placements',
+    name: 'Operating Systems for Placements',
+    title: 'Operating Systems for Placements Ecosystem Map',
+    subtitle: 'Processes, scheduling, synchronization, deadlocks, memory & file systems',
+    blurb: 'The OS topics placement interviews and OAs test: processes and threads, CPU scheduling, synchronization, deadlocks and the Banker\'s algorithm, paging and virtual memory, and file systems and disks, tied to Linux. Kernel development, device-driver internals and distributed OS theory are left out.',
+    accent: '#a78bfa',
+    tags: ['Scheduling', 'Synchronization', 'Paging', 'Deadlocks']
   }
 ];
