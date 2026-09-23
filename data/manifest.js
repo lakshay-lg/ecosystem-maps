@@ -34,5 +34,14 @@ window.EcosystemMapManifest = [
     blurb: 'The vanilla Three.js stack and the addon ecosystem around it: loaders and asset compression, physics engines, post-processing, and the performance work real scenes need.',
     accent: '#34d399',
     tags: ['WebGL', 'glTF', 'Physics', 'Performance']
+  },
+  {
+    slug: 'dsa-placements',
+    name: 'DSA for Placements',
+    title: 'DSA for Placements Ecosystem Map',
+    subtitle: 'Data structures, patterns, graphs & DP · platforms, sheets & the interview loop',
+    blurb: 'Everything campus coding rounds test: core structures, the recurring problem patterns, graphs and DP, plus the platforms, sheets and interview process to prepare with. CP-only depth (flows, FFT, HLD), system design and CS core subjects are left out.',
+    accent: '#fb923c',
+    tags: ['LeetCode', 'Patterns', 'Graphs', 'DP']
   }
 ];
